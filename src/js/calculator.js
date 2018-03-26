@@ -20,5 +20,15 @@ function fractionalToIp(fractional) {
     return ((denominator / (denominator + numerator)) * 100).toFixed(2);
 }
 
+// Minus moneyline odds into implied probability
+// Implied probability 	= ( - ( 'minus' moneyline odds ) ) / ( - ( 'minus' moneyline odds ) ) + 100
+// (- (-120) / ( (- (-120) ) + 100) = 120 / 220	= 0.545 * 100 = 54.55%
+
+
+function minusMoneyToIp(minusMoneyline) {
+    return ((-(minusMoneyline) / ((-(minusMoneyline)) + 100)) * 100).toFixed(2);
+}
+
 console.log("decimal to implied", decimalToIp(1.65));
 console.log("fractional to implied", fractionalToIp('5/2'));
+console.log("minus moneyline to implied", minusMoneylineToIp(-120));
