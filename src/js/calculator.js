@@ -1,6 +1,5 @@
 /* Odds calculator */
 
-
 // Decimal odds to implied probability
 // Implied probability 	= 	1 / "Decimal Odds"
 // 1 / 1.65 	= 	0.606 	* 100 = 	60.61%
@@ -24,11 +23,18 @@ function fractionalToIp(fractional) {
 // Implied probability 	= ( - ( 'minus' moneyline odds ) ) / ( - ( 'minus' moneyline odds ) ) + 100
 // (- (-120) / ( (- (-120) ) + 100) = 120 / 220	= 0.545 * 100 = 54.55%
 
-
-function minusMoneyToIp(minusMoneyline) {
+function minusMoneylineToIp(minusMoneyline) {
     return ((-(minusMoneyline) / ((-(minusMoneyline)) + 100)) * 100).toFixed(2);
+}
+
+// Plus moneyline odds into implied probability
+// Implied probability 	= 	100 / ( 'plus' moneyline odds + 100 )
+// ( 100 / 180 + 100 ) 	= 	100 / 280 	= 	0.357 * 100	= 35.7%
+function plusMoneylineToIp(plusMoneyline) {
+    return (100 / (plusMoneyline + 100) * 100).toFixed(2);
 }
 
 console.log("decimal to implied", decimalToIp(1.65));
 console.log("fractional to implied", fractionalToIp('5/2'));
 console.log("minus moneyline to implied", minusMoneylineToIp(-120));
+console.log("plus moneyline to implied", plusMoneylineToIp(180));
