@@ -30,11 +30,21 @@ function minusMoneylineToIp(minusMoneyline) {
 // Plus moneyline odds into implied probability
 // Implied probability 	= 	100 / ( 'plus' moneyline odds + 100 )
 // ( 100 / 180 + 100 ) 	= 	100 / 280 	= 	0.357 * 100	= 35.7%
-function plusMoneylineToIp(plusMoneyline) {
+
+function plusMoneylineToIp(plusMoneyline) {    
     return (100 / (plusMoneyline + 100) * 100).toFixed(2);
+}
+
+// Implied probability into decimal odds
+// Decimal Odds = 100 / implied probability
+// 100 / 75 = 1.33
+
+function ipToDecimal(impliedProbability) {
+    return (100 / impliedProbability).toFixed(2);
 }
 
 console.log("decimal to implied", decimalToIp(1.65));
 console.log("fractional to implied", fractionalToIp('5/2'));
 console.log("minus moneyline to implied", minusMoneylineToIp(-120));
 console.log("plus moneyline to implied", plusMoneylineToIp(180));
+console.log("implied probability to decimal", ipToDecimal(75));
