@@ -31,7 +31,7 @@ function minusMoneylineToIp(minusMoneyline) {
 // Implied probability 	= 	100 / ( 'plus' moneyline odds + 100 )
 // ( 100 / 180 + 100 ) 	= 	100 / 280 	= 	0.357 * 100	= 35.7%
 
-function plusMoneylineToIp(plusMoneyline) {    
+function plusMoneylineToIp(plusMoneyline) {
     return (100 / (plusMoneyline + 100) * 100).toFixed(2);
 }
 
@@ -43,8 +43,22 @@ function ipToDecimal(impliedProbability) {
     return (100 / impliedProbability).toFixed(2);
 }
 
+// Implied probability (50% and above) into moneyline odds
+// Moneyline Odds 	=  - ( implied probability / (100 - implied probability)) x 100
+// - (75 / (100 – 75)) x100 	= 	- (75 / 25) x 100 	= 	- 3 x 100 	= 	- 300
+// Implied probability (below 50%) to moneyline odds:
+// Moneyline odds 	= 	(100 - implied probability / implied probability ) x 100
+// ((100 - probability)/(probability) x 100) 	= 	((75) / (25) x 100) 	= 	3 x 100  = 	300
+
+
+function ipToMoneyline(impliedProbability) {
+    return impliedProbability > 50 ? (-(impliedProbability / (100 - impliedProbability)) * 100) : ((100 - impliedProbability) / (impliedProbability) * 100);
+}
+
 console.log("decimal to implied", decimalToIp(1.65));
 console.log("fractional to implied", fractionalToIp('5/2'));
 console.log("minus moneyline to implied", minusMoneylineToIp(-120));
 console.log("plus moneyline to implied", plusMoneylineToIp(180));
 console.log("implied probability to decimal", ipToDecimal(75));
+console.log("Implied probability (50% and above) to moneyline", ipToMoneyline(75));
+console.log("Implied probability (bellow 50%) to moneyline", ipToMoneyline(25));
