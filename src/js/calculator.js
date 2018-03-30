@@ -50,9 +50,15 @@ function ipToDecimal(impliedProbability) {
 // Moneyline odds 	= 	(100 - implied probability / implied probability ) x 100
 // ((100 - probability)/(probability) x 100) 	= 	((75) / (25) x 100) 	= 	3 x 100  = 	300
 
-
 function ipToMoneyline(impliedProbability) {
-    return impliedProbability > 50 ? (-(impliedProbability / (100 - impliedProbability)) * 100) : ((100 - impliedProbability) / (impliedProbability) * 100);
+    if (!impliedProbability) {
+        return 0;
+    }
+    if (typeof impliedProbability === "string") {
+        impliedProbability = Number(impliedProbability.replace(/[^0-9]/g, ''));
+    }
+
+    return impliedProbability > 50 ? (-(impliedProbability / (100 - impliedProbability)) * 100) : ((100 - impliedProbability) / (impliedProbability) * 100).toFixed();
 }
 
 console.log("decimal to implied", decimalToIp(1.65));
