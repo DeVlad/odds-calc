@@ -57,8 +57,11 @@ function ipToMoneyline(impliedProbability) {
     if (typeof impliedProbability === "string") {
         impliedProbability = Number(impliedProbability.replace(/[^0-9]/g, ''));
     }
+    if (impliedProbability < -400 || impliedProbability > 400 || impliedProbability === 0) {
+        return 0;
+    }
 
-    return impliedProbability > 50 ? (-(impliedProbability / (100 - impliedProbability)) * 100) : ((100 - impliedProbability) / (impliedProbability) * 100).toFixed();
+    return impliedProbability > 50 ? (-(impliedProbability / (100 - impliedProbability)) * 100).toFixed() : ((100 - impliedProbability) / (impliedProbability) * 100).toFixed();
 }
 
 console.log("decimal to implied", decimalToIp(1.65));
