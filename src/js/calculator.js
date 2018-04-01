@@ -5,6 +5,16 @@
 // 1 / 1.65 	= 	0.606 	* 100 = 	60.61%
 
 function decimalToIp(decimal) {
+    if (!decimal) {
+        return 0;
+    }
+    if (typeof decimal === "string") {
+        decimal = Number(decimal.replace(/[^0-9]/g, ''));
+    }
+    if (decimal <= 0) {
+        return 0;
+    }
+
     return ((1 / decimal) * 100).toFixed(2);
 }
 
