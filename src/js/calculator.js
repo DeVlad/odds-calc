@@ -34,6 +34,13 @@ function fractionalToIp(fractional) {
 // (- (-120) / ( (- (-120) ) + 100) = 120 / 220	= 0.545 * 100 = 54.55%
 
 function minusMoneylineToIp(minusMoneyline) {
+    if (typeof minusMoneyline === "string") {
+        minusMoneyline = Number(minusMoneyline.replace(/[^0-9]/g, ''));
+    }
+    if (!minusMoneyline || minusMoneyline < -10000 || minusMoneyline >= 0) {
+        return 0;
+    }
+
     return ((-(minusMoneyline) / ((-(minusMoneyline)) + 100)) * 100).toFixed(2);
 }
 
