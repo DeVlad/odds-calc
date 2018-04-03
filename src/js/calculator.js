@@ -49,6 +49,13 @@ function minusMoneylineToIp(minusMoneyline) {
 // ( 100 / 180 + 100 ) 	= 	100 / 280 	= 	0.357 * 100	= 35.7%
 
 function plusMoneylineToIp(plusMoneyline) {
+    if (typeof plusMoneyline === "string") {
+        plusMoneyline = Number(plusMoneyline.replace(/[^0-9]/g, ''));
+    }
+    if (!plusMoneyline || plusMoneyline > 10000 || plusMoneyline <= 0) {
+        return 0;
+    }
+
     return (100 / (plusMoneyline + 100) * 100).toFixed(2);
 }
 
