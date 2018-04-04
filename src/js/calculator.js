@@ -64,6 +64,16 @@ function plusMoneylineToIp(plusMoneyline) {
 // 100 / 75 = 1.33
 
 function ipToDecimal(impliedProbability) {
+    if (!impliedProbability) {
+        return 0;
+    }
+    if (typeof impliedProbability === "string") {
+        impliedProbability = Number(impliedProbability.replace(/[^0-9]/g, ''));
+    }
+    if (impliedProbability <= 0) {
+        return 0;
+    }
+
     return (100 / impliedProbability).toFixed(2);
 }
 
