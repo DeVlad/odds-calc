@@ -23,6 +23,10 @@ function decimalToIp(decimal) {
 // 5 / 2 	= 	2 / (2 + 5) 	= 	2 / 7 	= 	0.2857 * 100	= 28.57%
 
 function fractionalToIp(fractional) {
+    var isFraction = /^[1-9][0-9]*\/[1-9][0-9]*$/g;
+    if (!isFraction.test(fractional)) {
+        return 0;
+    }
     var f = fractional.split('/');
     var numerator = Number(f[0]);
     var denominator = Number(f[1]);
