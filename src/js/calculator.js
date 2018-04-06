@@ -81,6 +81,26 @@ function ipToDecimal(impliedProbability) {
     return (100 / impliedProbability).toFixed(2);
 }
 
+
+// implied probability into fractional odds
+// Fractional odds 	= 	( 100 / implied probability ) -1
+// (100 / 25) - 1 	= 	4 - 1 	= 	3
+// TODO: visualize as fractions
+
+function ipToFractional(impliedProbability) {
+    if (!impliedProbability) {
+        return 0;
+    }
+    if (typeof impliedProbability === "string") {
+        impliedProbability = Number(impliedProbability.replace(/[^0-9]/g, ''));
+    }
+    if (impliedProbability <= 0 || impliedProbability > 100) {
+        return 0;
+    }
+
+    return ((100 / impliedProbability) - 1);
+}
+
 // Implied probability (50% and above) into moneyline odds
 // Moneyline Odds 	=  - ( implied probability / (100 - implied probability)) x 100
 // - (75 / (100 – 75)) x100 	= 	- (75 / 25) x 100 	= 	- 3 x 100 	= 	- 300
@@ -107,5 +127,6 @@ console.log("fractional to implied", fractionalToIp('5/2'));
 console.log("minus moneyline to implied", minusMoneylineToIp(-120));
 console.log("plus moneyline to implied", plusMoneylineToIp(180));
 console.log("implied probability to decimal", ipToDecimal(75));
+console.log("implied probability to fractional", ipToFractional(75));
 console.log("Implied probability (50% and above) to moneyline", ipToMoneyline(75));
 console.log("Implied probability (bellow 50%) to moneyline", ipToMoneyline(25));
